@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Заморозка карты — Ultra Fitness</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .freeze-hero {
+      padding: 160px var(--pad) 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .freeze-hero::before {
+      content: '';
+      position: absolute;
+      right: -10%;
+      top: 20%;
+      width: 50vw;
+      max-width: 700px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31,200,81,0.18), transparent 65%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    .freeze-hero__inner {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .freeze-hero .crumb {
+      color: var(--text-faint);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 22px;
+    }
+    .freeze-hero h1 {
+      font-size: clamp(40px, 7vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+    }
+    .freeze-hero h1 em { color: var(--brand-bright); font-style: normal; }
+    .freeze-hero p {
+      margin-top: 28px;
+      max-width: 65ch;
+      color: var(--text-dim);
+      font-size: clamp(17px, 1.4vw, 19px);
+      line-height: 1.6;
+    }
+    .freeze-cta {
+      padding: 40px var(--pad) 120px;
+    }
+    .freeze-cta__panel {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: clamp(36px, 5vw, 64px);
+      border-radius: var(--radius-xl);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .freeze-cta__panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 80% at 100% 0%, rgba(31,200,81,0.15), transparent 60%);
+      pointer-events: none;
+    }
+    .freeze-cta h3 {
+      position: relative;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .freeze-cta p {
+      position: relative;
+      color: var(--text-dim);
+      margin-top: 16px;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .freeze-thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      background:
+        radial-gradient(80% 80% at 50% 50%, rgba(31, 200, 81, 0.25), transparent 65%),
+        linear-gradient(160deg, #0F1413, #07090A);
+      border: 1px solid var(--border-strong);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .freeze-thumb:hover { transform: translateY(-4px); }
+    .freeze-thumb__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 84px;
+      height: 84px;
+      border-radius: 999px;
+      background: var(--brand);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 20px 60px -10px var(--brand-glow);
+      transition: transform 0.3s;
+    }
+    .freeze-thumb:hover .freeze-thumb__play { transform: translate(-50%, -50%) scale(1.08); }
+    .freeze-thumb__play svg { width: 30px; height: 30px; fill: #001005; margin-left: 4px; }
+    .freeze-thumb__label {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+    }
+    .freeze-thumb__label::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--brand-bright);
+      box-shadow: 0 0 10px var(--brand-bright);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @media (max-width: 880px) {
+      .freeze-cta__panel { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <section class="freeze-hero">
+    <div class="freeze-hero__inner">
+      <div class="crumb reveal">Главная · Заморозка карты</div>
+      <h1 class="reveal" data-delay="1">Как заморозить<br/><em>клубную карту</em></h1>
+      <p class="reveal" data-delay="2">
+        Вы можете заморозить своё членство, используя наше мобильное приложение. Воспользуйтесь небольшой инструкцией, которая поможет вам посмотреть оставшиеся дни заморозки, а&nbsp;так&nbsp;же использовать их для&nbsp;приостановки членства.
+      </p>
+    </div>
+  </section>
+
+  <section class="freeze-cta">
+    <div class="freeze-cta__panel glass reveal">
+      <div>
+        <div class="eyebrow">Видеоинструкция</div>
+        <h3 style="margin-top:18px;">Посмотрите короткое<br/>видео&nbsp;— и&nbsp;разберётесь за&nbsp;2&nbsp;минуты</h3>
+        <p>Откроется во&nbsp;всплывающем окне прямо здесь&nbsp;— не&nbsp;нужно никуда переходить.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; position:relative;">
+          <button class="btn btn--primary" data-open-freeze>
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M8 5v14l11-7z"/></svg>
+            Смотреть видеоинструкцию
+          </button>
+          <a class="btn btn--ghost" href="app.html">Скачать приложение</a>
+        </div>
+      </div>
+      <div class="freeze-thumb" data-open-freeze>
+        <div class="freeze-thumb__play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="freeze-thumb__label">2:00 · видеоинструкция</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Video popup -->
+<div class="uf-modal" id="freezeVideo" aria-hidden="true">
+  <div class="uf-modal__backdrop" data-close-freeze></div>
+  <div class="uf-video__panel">
+    <button class="uf-modal__close uf-video__close" data-close-freeze aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="uf-video__frame">
+      <iframe id="freezeIframe" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<script src="site.js"></script>
+<script>
+  (function () {
+    const modal = document.getElementById('freezeVideo');
+    const iframe = document.getElementById('freezeIframe');
+    const SRC = 'https://vk.com/video_ext.php?oid=-19822697&id=456239930&hd=2&autoplay=1';
+    const open = () => { iframe.src = SRC; modal.classList.add('is-open'); document.body.style.overflow='hidden'; };
+    const close = () => { modal.classList.remove('is-open'); document.body.style.overflow=''; setTimeout(() => { iframe.src='about:blank'; }, 400); };
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('[data-open-freeze]')) { e.preventDefault(); open(); }
+      if (e.target.closest('[data-close-freeze]')) { e.preventDefault(); close(); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+    });
+  })();
+</script>
+</body>
+</html>

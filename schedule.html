@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Расписание — Ultra Fitness</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .sched-hero {
+      padding: 180px var(--pad) 40px;
+    }
+    .sched-hero__inner { max-width: 1320px; margin: 0 auto; }
+    .sched-hero h1 { font-size: clamp(48px, 8vw, 132px); font-weight: 900; letter-spacing: -0.05em; line-height: 0.9; }
+    .sched-hero h1 em { color: var(--brand-bright); font-style: normal; }
+
+    .sched-tabs {
+      max-width: 1320px;
+      margin: 28px auto 24px;
+      padding: 0 var(--pad);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .sched-tab {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .sched-tab:hover { color: var(--text); }
+    .sched-tab.is-active {
+      background: var(--brand);
+      color: #001005;
+      border-color: var(--brand);
+    }
+
+    .sched-grid {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px var(--pad) 120px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 14px;
+    }
+    .day {
+      padding: 18px 14px 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 320px;
+    }
+    .day__head {
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .day__head .name { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-faint); margin-bottom: 4px; }
+    .day__head .date { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+    .day.is-today .date { color: var(--brand-bright); }
+    .day.is-today {
+      background: linear-gradient(180deg, rgba(31,200,81,0.08), rgba(31,200,81,0.02));
+      border-color: rgba(31,200,81,0.35);
+      box-shadow: inset 0 0 30px rgba(31,200,81,0.08);
+    }
+
+    .class {
+      padding: 12px 12px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .class:hover {
+      background: rgba(31,200,81,0.10);
+      border-color: rgba(31,200,81,0.40);
+      transform: translateY(-1px);
+    }
+    .class__time { font-size: 12px; font-weight: 700; color: var(--brand-bright); letter-spacing: 0.04em; }
+    .class__name { font-size: 14px; font-weight: 600; margin-top: 4px; letter-spacing: -0.01em; line-height: 1.2; }
+    .class__coach { font-size: 11px; color: var(--text-faint); margin-top: 4px; }
+    .class.boxing { border-color: rgba(255,180,40,0.35); }
+    .class.boxing .class__time { color: #FFC44C; }
+    .class.spa { border-color: rgba(31, 200, 81, 0.25); }
+
+    .sched-widget {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px var(--pad) 120px;
+    }
+    .sched-widget__shell {
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      min-height: 600px;
+      position: relative;
+    }
+    /* The 1C widget renders its own theme – give it room and a light surface so its UI is legible */
+    [data-fit1c-calendar] {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 600px;
+      color: #111;
+      padding: 12px 18px;
+    }
+    @media (max-width: 640px) {
+      [data-fit1c-calendar] { padding: 8px 10px; }
+    }
+    [data-fit1c-calendar] a { color: #1FC851; }
+    .sched-widget__loader {
+      position: absolute;
+      inset: 18px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-faint);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+    }
+    .sched-widget__loader .spinner {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 2px solid rgba(31,200,81,0.2);
+      border-top-color: var(--brand-bright);
+      animation: spin 0.9s linear infinite;
+      margin-right: 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<main>
+  <section class="sched-hero">
+    <div class="sched-hero__inner">
+      <div class="reveal" style="color:var(--text-faint); font-size:13px; text-transform:uppercase; letter-spacing:0.18em; margin-bottom:18px;">Главная · Расписание</div>
+      <h1 class="reveal" data-delay="1">Расписание<br/><em>на неделю</em></h1>
+      <p class="reveal" data-delay="2" style="color:var(--text-dim); font-size:18px; max-width:60ch; margin-top:24px;">75 направлений фитнеса. Запись через <a href="app.html" style="color: var(--brand-bright); border-bottom: 1px solid rgba(31,200,81,0.4); padding-bottom: 1px;">мобильное приложение</a> или <a href="https://ultra-fitness.ru/account" target="_blank" rel="noopener" style="color: var(--brand-bright); border-bottom: 1px solid rgba(31,200,81,0.4); padding-bottom: 1px;">личный кабинет</a>.</p>
+    </div>
+  </section>
+
+  <section class="sched-widget reveal">
+    <div class="sched-widget__shell">
+      <div class="sched-widget__loader" id="schedLoader">
+        <span class="spinner"></span> Загружаем расписание…
+      </div>
+      <div data-fit1c-calendar>
+        <a href="https://www.fitness1c.ru/schedule?token=axEh6u8xUnV3FnQjXMSAeyA1">Расписание работает на 1С:Фитнес клуб</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="site.js"></script>
+<script src="https://reservi.ru/widget-fit1c.v2/js/config.js" data-fit-salon-id="ef040e9b-785f-4543-8fbe-cfdbd224b09c"></script>
+<script>
+  // hide loader once widget injects content
+  const target = document.querySelector('[data-fit1c-calendar]');
+  const loader = document.getElementById('schedLoader');
+  if (target && loader) {
+    const obs = new MutationObserver(() => {
+      if (target.querySelector('iframe, .fit1c, table, [class*="fit"]')) {
+        loader.style.display = 'none';
+        obs.disconnect();
+      }
+    });
+    obs.observe(target, { childList: true, subtree: true });
+    // safety: hide after 6s regardless
+    setTimeout(() => { loader.style.display = 'none'; }, 6000);
+  }
+</script>
+</body>
+</html>

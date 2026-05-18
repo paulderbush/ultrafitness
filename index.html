@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ultra Fitness — фитнес-клуб премиум-класса в Люберцах</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 140px var(--pad) 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero__city {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--brand-bright);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero__city .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--brand-bright);
+      box-shadow: 0 0 16px var(--brand-bright);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .hero__title {
+      font-size: clamp(54px, 9.5vw, 168px);
+      font-weight: 900;
+      letter-spacing: -0.055em;
+      line-height: 0.86;
+      max-width: 18ch;
+    }
+    .hero__title .accent {
+      color: var(--brand-bright);
+      font-style: italic;
+      font-weight: 800;
+    }
+    .hero__title .accent-outline {
+      -webkit-text-stroke: 2px var(--brand-bright);
+      color: transparent;
+    }
+    .hero__sale {
+      margin-top: 36px;
+      max-width: 640px;
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+      padding: 20px 22px;
+      border-radius: 20px;
+    }
+    .hero__sale .badge {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--brand);
+      color: #001005;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      box-shadow: 0 0 30px -5px var(--brand-glow);
+    }
+    .hero__sale .badge span { font-size: 11px; font-weight: 700; letter-spacing: 0; margin-top: 2px; opacity: 0.7; }
+    .hero__sale .copy { font-size: 15px; line-height: 1.45; color: var(--text); }
+    .hero__sale .copy b { color: var(--brand-bright); font-weight: 700; }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-faint);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+    .hero__scroll .line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(180deg, transparent, var(--brand-bright));
+      animation: scrollLine 2s infinite ease-in-out;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ===== FLYING CARD ===== */
+    .fly-card {
+      position: fixed;
+      pointer-events: auto;
+      width: 360px;
+      height: 220px;
+      border-radius: 24px;
+      z-index: 50;
+      cursor: pointer;
+      transform-origin: center center;
+      will-change: transform, top, left;
+      transition: filter 0.4s ease;
+    }
+    .fly-card__inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 90% at 110% -10%, rgba(31, 200, 81, 0.55), transparent 55%),
+        radial-gradient(80% 70% at -10% 110%, rgba(31, 200, 81, 0.25), transparent 60%),
+        linear-gradient(140deg, #0F1413, #07090A 60%, #0E1614);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow:
+        0 30px 80px -20px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 0 60px -10px var(--brand-glow);
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform-style: preserve-3d;
+    }
+    .fly-card__inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(255,255,255,0.18), transparent 50%),
+        linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.10) 50%, transparent 70%);
+      pointer-events: none;
+    }
+    .fly-card__chip {
+      width: 42px;
+      height: 32px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #C9D2A2, #7E8A45 60%, #5F6A30);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3), inset 0 2px 0 rgba(255,255,255,0.15);
+      position: relative;
+    }
+    .fly-card__chip::after {
+      content: '';
+      position: absolute;
+      inset: 4px 6px;
+      border-radius: 4px;
+      background:
+        linear-gradient(90deg, transparent 40%, rgba(0,0,0,0.4) 41%, rgba(0,0,0,0.4) 42%, transparent 43%),
+        linear-gradient(90deg, transparent 60%, rgba(0,0,0,0.4) 61%, rgba(0,0,0,0.4) 62%, transparent 63%),
+        linear-gradient(0deg, transparent 49%, rgba(0,0,0,0.4) 50%, transparent 51%);
+    }
+    .fly-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .fly-card__logo {
+      height: 28px;
+      filter: drop-shadow(0 0 8px rgba(31,200,81,0.45));
+    }
+    .fly-card__type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brand-bright);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(31, 200, 81, 0.12);
+      border: 1px solid rgba(31, 200, 81, 0.35);
+    }
+    .fly-card__num {
+      font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      color: rgba(255,255,255,0.92);
+    }
+    .fly-card__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .fly-card__bottom .label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+    }
+    .fly-card__bottom .value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .fly-card__cta {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      background: rgba(7, 9, 10, 0.55);
+      backdrop-filter: blur(8px);
+      transition: opacity 0.3s;
+      border-radius: 24px;
+    }
+    .fly-card:hover .fly-card__cta { opacity: 1; }
+    .fly-card__cta-btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #001005;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fly-card__cta-btn svg { width: 16px; height: 16px; }
+
+    @media (max-width: 980px) {
+      .fly-card { width: 280px; height: 172px; }
+      .fly-card__logo { height: 22px; }
+      .fly-card__num { font-size: 15px; }
+    }
+    @media (max-width: 640px) {
+      .fly-card { width: 220px; height: 138px; }
+      .fly-card__inner { padding: 14px 16px; border-radius: 18px; }
+      .fly-card__logo { height: 18px; }
+      .fly-card__num { font-size: 12px; }
+      .fly-card__chip { width: 30px; height: 24px; }
+      .fly-card__bottom .label { font-size: 7px; }
+      .fly-card__bottom .value { font-size: 11px; }
+    }
+
+    /* ===== STATS ===== */
+    .stats {
+      padding: clamp(80px, 14vh, 160px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .stat {
+      padding: 36px 32px 40px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat__num {
+      font-size: clamp(56px, 7vw, 96px);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .stat__num .unit { font-size: 0.45em; font-weight: 700; color: var(--brand-bright); }
+    .stat__label {
+      margin-top: 16px;
+      font-size: 16px;
+      color: var(--text-dim);
+      line-height: 1.45;
+      max-width: 22ch;
+    }
+    .stat__icon {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      width: 28px;
+      height: 28px;
+      stroke: var(--brand-bright);
+      stroke-width: 1.5;
+      opacity: 0.6;
+    }
+    @media (max-width: 880px) {
+      .stats__grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    .cta-block {
+      max-width: 1320px;
+      margin: 60px auto 0;
+      padding: 0 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: clamp(80px, 14vh, 160px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .about__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about__text p {
+      color: var(--text-dim);
+      font-size: clamp(16px, 1.25vw, 18px);
+      line-height: 1.65;
+      margin-top: 18px;
+    }
+    .about__buttons {
+      margin-top: 36px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .about__big {
+      font-size: clamp(40px, 5.5vw, 88px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .about__big em {
+      color: var(--brand-bright);
+      font-style: normal;
+    }
+    @media (max-width: 980px) {
+      .about__inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ===== 999 BLOCK ===== */
+    .offer-999 {
+      padding: clamp(60px, 10vh, 120px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .offer-999__panel {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 80px);
+      border-radius: var(--radius-xl);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .offer-999__panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(60% 60% at 0% 0%, rgba(31, 200, 81, 0.18), transparent 60%),
+        radial-gradient(50% 60% at 100% 100%, rgba(31, 200, 81, 0.10), transparent 60%);
+      pointer-events: none;
+    }
+    .offer-999__title {
+      position: relative;
+      font-size: clamp(40px, 5.5vw, 88px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .offer-999__title .price {
+      color: var(--brand-bright);
+      font-style: italic;
+    }
+    .offer-999__sub {
+      position: relative;
+      color: var(--text-dim);
+      font-size: 17px;
+      margin-top: 24px;
+      max-width: 50ch;
+      line-height: 1.55;
+    }
+    .offer-999__form {
+      position: relative;
+      padding: 32px;
+      border-radius: 24px;
+    }
+    .offer-999__form h4 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 980px) {
+      .offer-999__panel { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ===== SALES (3 cards) ===== */
+    .sales {
+      padding: clamp(80px, 14vh, 160px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .sales__head {
+      max-width: 1320px;
+      margin: 0 auto 56px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .sales__grid {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .sale-card {
+      position: relative;
+      aspect-ratio: 700 / 1010;
+      border-radius: 28px;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateZ(0);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sale-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sale-card:hover { transform: translateY(-6px); }
+    .sale-card:hover img { transform: scale(1.05); }
+    .sale-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.5));
+      pointer-events: none;
+    }
+    @media (max-width: 880px) {
+      .sales__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      padding: clamp(80px, 14vh, 160px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .gallery__head {
+      max-width: 1320px;
+      margin: 0 auto 56px;
+    }
+    .gallery__grid {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 1fr;
+      gap: 16px;
+    }
+    .gallery__item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      cursor: pointer;
+      aspect-ratio: 1 / 1;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery__item:hover { transform: translateY(-4px); }
+    .gallery__item:hover img { transform: scale(1.08); }
+    .gallery__item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.45));
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .gallery__item:hover::after { opacity: 1; }
+    .gallery__zoom {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.22);
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 2;
+    }
+    .gallery__zoom svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 2; }
+    .gallery__item:hover .gallery__zoom { opacity: 1; transform: none; }
+
+    @media (max-width: 880px) {
+      .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    }
+    @media (max-width: 540px) {
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      background: rgba(5, 7, 8, 0.92);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .lightbox.is-open { opacity: 1; pointer-events: auto; }
+    .lightbox__stage {
+      position: relative;
+      width: min(90vw, 1400px);
+      height: min(82vh, 900px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox__img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 30px 80px -10px rgba(0,0,0,0.7), 0 0 60px -20px var(--brand-glow);
+      transform: scale(0.96);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s;
+    }
+    .lightbox.is-open .lightbox__img { transform: none; opacity: 1; }
+    .lightbox__btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(16px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lightbox__btn:hover { background: rgba(255,255,255,0.18); transform: scale(1.05); }
+    .lightbox__btn svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; }
+    .lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(16px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lightbox__nav:hover { background: rgba(31,200,81,0.30); border-color: rgba(31,200,81,0.55); }
+    .lightbox__nav svg { width: 24px; height: 24px; stroke: #fff; stroke-width: 2; }
+    .lightbox__nav--prev { left: 24px; }
+    .lightbox__nav--next { right: 24px; }
+    .lightbox__nav:hover { transform: translateY(-50%) scale(1.05); }
+    .lightbox__counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(16px);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      z-index: 3;
+    }
+    .lightbox__counter b { color: var(--brand-bright); }
+    @media (max-width: 640px) {
+      .lightbox__nav { width: 44px; height: 44px; }
+      .lightbox__nav--prev { left: 10px; }
+      .lightbox__nav--next { right: 10px; }
+      .lightbox__btn { top: 14px; right: 14px; width: 40px; height: 40px; }
+      .lightbox__stage { width: 96vw; height: 78vh; }
+    }
+
+    /* ===== NEWS ===== */
+    .news {
+      padding: clamp(80px, 14vh, 160px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .news__head {
+      max-width: 1320px;
+      margin: 0 auto 56px;
+    }
+    .news__rail {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .news-card {
+      position: relative;
+      aspect-ratio: 700 / 1010;
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .news-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+    .news-card:hover { transform: translateY(-4px); }
+    .news-card:hover img { transform: scale(1.05); }
+    @media (max-width: 980px) {
+      .news__rail { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .news__rail { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+
+    /* ===== MAP ===== */
+    .map-block {
+      padding: clamp(60px, 10vh, 120px) var(--pad);
+      position: relative;
+      z-index: 2;
+    }
+    .map-block__panel {
+      max-width: 1320px;
+      margin: 0 auto;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      min-height: 460px;
+    }
+    .map-block__info {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+    .map-block__info h3 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .map-block__info .row {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-top: 8px;
+    }
+    .map-block__info .row svg { width: 18px; height: 18px; stroke: var(--brand-bright); flex-shrink: 0; margin-top: 2px; }
+    .map-block__info .row > div .l { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-faint); margin-bottom: 4px; }
+    .map-block__info .row > div .v { font-size: 16px; color: var(--text); }
+    .map-block__info .row > div .v a { color: var(--text); }
+    .map-block__info .row > div .v a:hover { color: var(--brand-bright); }
+    .map-block__iframe {
+      position: relative;
+      min-height: 360px;
+    }
+    .map-block__iframe iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(0.4) contrast(1.05);
+    }
+    @media (max-width: 880px) {
+      .map-block__panel { grid-template-columns: 1fr; }
+      .map-block__iframe { min-height: 320px; }
+    }
+
+    /* hide flying card on smallest screens to keep things tidy */
+    @media (max-width: 480px) {
+      .fly-card { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== FLYING CARD ===== -->
+<div class="fly-card" id="flyCard" role="button" aria-label="Забронировать клубную карту" data-open-booking data-screen-label="Flying Card">
+  <div class="fly-card__inner">
+    <div class="fly-card__top">
+      <img src="assets/logo.webp" alt="UF" class="fly-card__logo" />
+      <div class="fly-card__type">Platinum</div>
+    </div>
+    <div class="fly-card__num">24/7 · ULTRA · FIT</div>
+    <div class="fly-card__bottom">
+      <div>
+        <div class="label">Держатель</div>
+        <div class="value">ULTRA MEMBER</div>
+      </div>
+      <div style="text-align:right">
+        <div class="label">Действует</div>
+        <div class="value">∞ / 2026</div>
+      </div>
+    </div>
+    <div class="fly-card__cta">
+      <div class="fly-card__cta-btn">
+        Забронировать
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero" data-screen-label="01 Hero">
+  <div class="container">
+    <div class="hero__city reveal">
+      <span class="dot"></span>
+      г. Люберцы · 24/7 · с 2014 года
+    </div>
+    <h1 class="hero__title reveal" data-delay="1">
+      Фитнес-клуб<br/>
+      в <span class="accent">Люберцах</span>
+    </h1>
+    <div class="hero__sale glass reveal" data-delay="2">
+      <div class="badge">−80%<span>SALE</span></div>
+      <div class="copy">
+        <b>Раз в году — главная распродажа весны!</b><br/>
+        Только одна майская неделя — скидки до 80% на клубные карты.
+      </div>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <span>Листай</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats" id="stats" data-screen-label="02 Stats">
+  <div class="stats__grid">
+    <div class="stat glass reveal">
+      <svg class="stat__icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg>
+      <div class="stat__num">3000<span class="unit">м²</span></div>
+      <div class="stat__label">Фитнес-клуб премиум-класса</div>
+    </div>
+    <div class="stat glass reveal" data-delay="1">
+      <svg class="stat__icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11M6.5 17.5l11-11M3 12h2M19 12h2M12 3v2M12 19v2"/></svg>
+      <div class="stat__num">75</div>
+      <div class="stat__label">Направлений фитнеса</div>
+    </div>
+    <div class="stat glass reveal" data-delay="2">
+      <svg class="stat__icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <div class="stat__num">24/7</div>
+      <div class="stat__label">Работаем круглосуточно</div>
+    </div>
+  </div>
+  <div class="cta-block reveal" data-delay="2">
+    <button class="btn btn--primary" data-open-booking>
+      Забронировать карту
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about" data-screen-label="03 About">
+  <div class="about__inner">
+    <div class="about__heading reveal">
+      <div class="eyebrow">О клубе</div>
+      <h2 class="about__big" style="margin-top: 18px;">
+        Создавай тело мечты в <em>Ultra Fitness</em>
+      </h2>
+    </div>
+    <div class="about__text reveal" data-delay="1">
+      <p>
+        В фитнес-клубе Ультра Фитнес каждый может создать тело мечты! Только квалифицированный персонал, профессиональные тренеры, лучшее обслуживание и сервис на высочайшем уровне. Каждая деталь интерьера мотивирует к достижению цели. Достаточно один раз посетить фитнес-центр, чтобы проникнуться чувствами к спорту.
+      </p>
+      <p>
+        Достижения мировой фитнес-индустрии дополняются инновационными тренажерами от именитых компаний. Индивидуальные программы тренировок, авторские групповые и индивидуальные занятия на любой вкус для детей и взрослых.
+      </p>
+      <div class="about__buttons">
+        <button class="btn btn--primary"
+          data-open-booking
+          data-modal-eyebrow="Пробная тренировка"
+          data-modal-title="Запишитесь на пробную тренировку"
+          data-modal-sub="Менеджер свяжется с вами, подберёт удобное время и направление — на знакомство с клубом и тренером."
+          data-modal-button="Записаться">
+          Записаться на пробную
+        </button>
+        <button class="btn btn--ghost" data-open-video>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Смотреть видео
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 999 OFFER ===== -->
+<section class="offer-999" id="offer999">
+  <div class="offer-999__panel glass reveal">
+    <div>
+      <div class="eyebrow">Старт за 999 ₽</div>
+      <h2 class="offer-999__title" style="margin-top: 18px;">
+        Большой<br/>фитнес-центр<br/>в Люберцах за <span class="price">999 ₽</span>
+      </h2>
+      <p class="offer-999__sub">Оформите заявку и начните тренировки за 999 ₽. Предложение ограничено — действует только в течение майской недели скидок.</p>
+    </div>
+    <div class="offer-999__form glass-strong">
+      <h4>Оформите заявку</h4>
+      <form class="uf-form" id="offerForm" novalidate>
+        <div class="uf-field">
+          <input type="text" name="name" placeholder="Ваше имя" required autocomplete="name" />
+        </div>
+        <div class="uf-field">
+          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel" data-phone-mask />
+        </div>
+        <label class="uf-consent">
+          <input type="checkbox" name="consent" checked required />
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span>Я даю согласие на обработку моих персональных данных в соответствии с <a href="#">Политикой</a></span>
+        </label>
+        <button type="submit" class="btn btn--primary">
+          Забронировать
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SALES ===== -->
+<section class="sales" id="sales" data-screen-label="04 Sales">
+  <div class="sales__head">
+    <div class="reveal">
+      <div class="eyebrow">Майские акции</div>
+      <h2 class="section-title" style="margin-top:18px;">Скидки <em style="color:var(--brand-bright);font-style:italic;">до&nbsp;80%</em></h2>
+    </div>
+    <p class="section-sub reveal" data-delay="1">Лучшие предложения мая. Закрытая распродажа на клубные карты разных категорий — успейте занять место в команде.</p>
+  </div>
+  <div class="sales__grid">
+    <div class="sale-card reveal" data-open-booking><img src="assets/sale-1.webp" alt="Скидка 1" loading="lazy" /></div>
+    <div class="sale-card reveal" data-delay="1" data-open-booking><img src="assets/sale-2.webp" alt="Скидка 2" loading="lazy" /></div>
+    <div class="sale-card reveal" data-delay="2" data-open-booking><img src="assets/sale-3.webp" alt="Скидка 3" loading="lazy" /></div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery" data-screen-label="05 Gallery">
+  <div class="gallery__head">
+    <div class="reveal">
+      <div class="eyebrow">Пространства клуба</div>
+      <h2 class="section-title" style="margin-top:18px;">Зайди — и не захочешь уходить</h2>
+    </div>
+  </div>
+  <div class="gallery__grid" data-lightbox="gallery">
+    <div class="gallery__item reveal" data-src="assets/club-1.jpeg"><img src="assets/club-1.jpeg" alt="Кардио-зона" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-delay="1" data-src="assets/club-2.jpeg"><img src="assets/club-2.jpeg" alt="Боксёрский зал" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-delay="2" data-src="assets/club-3.jpeg"><img src="assets/club-3.jpeg" alt="Тренажёрный зал" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-delay="3" data-src="assets/club-4.jpeg"><img src="assets/club-4.jpeg" alt="Зал единоборств" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-src="assets/club-5.jpeg"><img src="assets/club-5.jpeg" alt="Силовая" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-delay="1" data-src="assets/club-6.jpeg"><img src="assets/club-6.jpeg" alt="Тренировка" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-delay="2" data-src="assets/club-7.png"><img src="assets/club-7.png" alt="Детский фитнес" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    <div class="gallery__item reveal" data-delay="3" data-src="assets/hall-1.webp"><img src="assets/hall-1.webp" alt="Студия пилатеса" loading="lazy" /><div class="gallery__zoom"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__btn" id="lbClose" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Предыдущее">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Следующее">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox__stage">
+      <img class="lightbox__img" id="lbImg" alt="" />
+    </div>
+    <div class="lightbox__counter"><b id="lbCur">1</b> / <span id="lbTotal">8</span></div>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section class="news" id="news" data-screen-label="06 News">
+  <div class="news__head">
+    <div class="reveal">
+      <div class="eyebrow">Новости и акции</div>
+      <h2 class="section-title" style="margin-top:18px;">Что происходит в клубе</h2>
+    </div>
+  </div>
+  <div class="news__rail">
+    <div class="news-card reveal"><img src="assets/news-1.webp" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="1"><img src="assets/news-2.webp" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="2"><img src="assets/news-3.webp" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="3"><img src="assets/news-4.webp" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal"><img src="assets/news-5.webp" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="1"><img src="assets/news-6.webp" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="2"><img src="assets/news-7.jpeg" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="3"><img src="assets/news-8.jpeg" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal"><img src="assets/news-9.jpeg" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="1"><img src="assets/news-10.jpeg" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="2"><img src="assets/news-11.jpeg" alt="Новость" loading="lazy" /></div>
+    <div class="news-card reveal" data-delay="3"><img src="assets/news-12.jpeg" alt="Новость" loading="lazy" /></div>
+  </div>
+</section>
+
+<!-- ===== MAP ===== -->
+<section class="map-block" id="map">
+  <div class="map-block__panel glass reveal">
+    <div class="map-block__info">
+      <div class="eyebrow">Как добраться</div>
+      <h3>г. Люберцы<br/>ул. Побратимов, 7</h3>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div>
+          <div class="l">График</div>
+          <div class="v">Круглосуточно · 24/7</div>
+        </div>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div>
+          <div class="l">Телефон</div>
+          <div class="v"><a href="tel:+74992260932">+7 499 226 09 32</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div>
+          <div class="l">Почта</div>
+          <div class="v"><a href="mailto:info@ultra-fitness.ru">info@ultra-fitness.ru</a></div>
+        </div>
+      </div>
+      <a class="btn btn--outline" href="https://yandex.ru/maps/?text=г.Люберцы+ул.+Побратимов+7" target="_blank" rel="noopener" style="margin-top: 12px; align-self: flex-start;">
+        Построить маршрут
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="map-block__iframe">
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?ll=37.896400%2C55.692115&z=17&pt=37.896400%2C55.692115%2Cpm2gnm"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="site.js"></script>
+<script src="fly-card.js"></script>
+<script>
+  // ===== LIGHTBOX =====
+  (function () {
+    const grid = document.querySelector('[data-lightbox="gallery"]');
+    const lb = document.getElementById('lightbox');
+    if (!grid || !lb) return;
+    const img = document.getElementById('lbImg');
+    const cur = document.getElementById('lbCur');
+    const total = document.getElementById('lbTotal');
+    const items = [...grid.querySelectorAll('.gallery__item')].map((el) => ({ src: el.dataset.src, alt: el.querySelector('img').alt }));
+    let i = 0;
+    total.textContent = items.length;
+
+    function show(n) {
+      i = (n + items.length) % items.length;
+      img.style.opacity = 0;
+      img.style.transform = 'scale(0.96)';
+      const next = new Image();
+      next.onload = () => {
+        img.src = items[i].src;
+        img.alt = items[i].alt;
+        requestAnimationFrame(() => {
+          img.style.opacity = 1;
+          img.style.transform = 'scale(1)';
+        });
+      };
+      next.src = items[i].src;
+      cur.textContent = i + 1;
+    }
+    function open(n) {
+      show(n);
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    items.forEach((_, n) => {
+      grid.querySelectorAll('.gallery__item')[n].addEventListener('click', () => open(n));
+    });
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', (e) => { e.stopPropagation(); show(i - 1); });
+    document.getElementById('lbNext').addEventListener('click', (e) => { e.stopPropagation(); show(i + 1); });
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(i - 1);
+      else if (e.key === 'ArrowRight') show(i + 1);
+    });
+  })();
+</script>
+<script>
+  // Handle in-line offer form (re-use modal thanks flow)
+  document.getElementById('offerForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const f = e.target;
+    const name = f.name.value.trim();
+    const phone = f.phone.value.trim();
+    const consent = f.consent.checked;
+    if (!name || phone.replace(/\D/g, '').length < 11 || !consent) return;
+    // morph form into thanks state
+    f.innerHTML = `
+      <div class="uf-thanks" style="display:block; padding: 6px 0 6px;">
+        <div class="uf-thanks__icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3 class="uf-modal__title" style="font-size:22px;">Заявка принята</h3>
+        <p class="uf-modal__sub" style="margin: 8px 0 0;">Менеджер свяжется в ближайшее время</p>
+      </div>`;
+  });
+</script>
+
+</body>
+</html>

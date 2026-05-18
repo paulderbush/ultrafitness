@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Мобильное приложение — Ultra Fitness</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .app-hero {
+      padding: 180px var(--pad) 80px;
+      position: relative;
+    }
+    .app-hero__grid {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .app-hero h1 {
+      font-size: clamp(40px, 6vw, 92px);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+    }
+    .app-hero h1 em { color: var(--brand-bright); font-style: normal; }
+    .app-hero p { color: var(--text-dim); font-size: 18px; line-height: 1.55; margin-top: 24px; max-width: 50ch; }
+
+    .app-stores {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      gap: 18px;
+      align-items: center;
+    }
+    .app-stores a {
+      display: block;
+      transition: transform 0.25s, filter 0.25s;
+    }
+    .app-stores a:hover {
+      transform: translateY(-3px);
+      filter: drop-shadow(0 12px 30px rgba(31,200,81,0.20));
+    }
+    .app-stores a img { height: 60px; width: auto; display: block; }
+    .app-stores .account-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 60px;
+      padding: 0 22px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .app-stores .account-btn:hover { background: rgba(255,255,255,0.10); }
+
+    .app-phone {
+      position: relative;
+      aspect-ratio: 9 / 19;
+      max-width: 320px;
+      margin: 0 auto;
+      border-radius: 44px;
+      background: linear-gradient(160deg, #1B2421, #07090A);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow:
+        0 60px 120px -30px rgba(0,0,0,0.7),
+        0 0 80px -10px var(--brand-glow),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    .app-phone__screen {
+      position: absolute;
+      inset: 12px;
+      border-radius: 34px;
+      background:
+        radial-gradient(80% 60% at 50% 0%, rgba(31,200,81,0.22), transparent 60%),
+        linear-gradient(180deg, #0C0F0E, #050706);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 42px 20px 24px;
+    }
+    .app-phone__notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 28px;
+      background: #000;
+      border-radius: 999px;
+    }
+    .app-phone__logo {
+      height: 34px;
+      width: auto;
+      filter: drop-shadow(0 0 14px rgba(31,200,81,0.5));
+      margin: 0 auto 18px;
+    }
+    .app-phone__hello {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-faint);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .app-phone__greeting {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-top: 4px;
+    }
+    .app-phone__card {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 18px;
+      background:
+        radial-gradient(120% 100% at 110% -10%, rgba(31, 200, 81, 0.55), transparent 55%),
+        linear-gradient(140deg, #0F1413, #07090A);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .app-phone__card .l { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+    .app-phone__card .num { font-family: 'JetBrains Mono', monospace; font-size: 12px; margin-top: 8px; letter-spacing: 0.12em; }
+    .app-phone__stat {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .app-phone__stat .v { font-size: 22px; font-weight: 800; color: var(--brand-bright); letter-spacing: -0.02em; }
+    .app-phone__stat .lbl { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 2px;}
+
+    @media (max-width: 880px) {
+      .app-hero__grid { grid-template-columns: 1fr; }
+      .app-phone { order: -1; max-width: 240px; }
+      .app-stores { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <section class="app-hero">
+    <div class="app-hero__grid">
+      <div class="reveal">
+        <div class="eyebrow">Мобильное приложение</div>
+        <h1 style="margin-top: 18px;">Ultra Fitness <em>в&nbsp;кармане</em></h1>
+        <p>Расписание, запись на тренировки, баланс клубной карты, заморозка и push-уведомления о ваших занятиях. Скачайте приложение в&nbsp;удобном для&nbsp;вас сторе.</p>
+
+        <div class="app-stores">
+          <a href="https://apps.apple.com/ru/app/uf-fitness/id6504359550" target="_blank" rel="noopener" aria-label="App Store">
+            <img src="assets/appstore.png" alt="App Store" />
+          </a>
+          <a href="https://www.rustore.ru/catalog/app/com.mobifitness.ultrafitnesslyu138849?_rsc=hkrd7" target="_blank" rel="noopener" aria-label="RuStore">
+            <img src="assets/rustore.png" alt="RuStore" />
+          </a>
+          <a href="https://appgallery.huawei.com/#/app/C111536885" target="_blank" rel="noopener" aria-label="Huawei AppGallery">
+            <img src="assets/huawei.png" alt="AppGallery" />
+          </a>
+          <a href="https://ultra-fitness.ru/account" target="_blank" rel="noopener" class="account-btn">
+            Личный кабинет
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal" data-delay="1">
+        <div class="app-phone">
+          <div class="app-phone__notch"></div>
+          <div class="app-phone__screen">
+            <div class="app-phone__hello">Доброе утро</div>
+            <div class="app-phone__greeting">Привет, Ольга</div>
+            <img src="assets/logo.webp" class="app-phone__logo" style="margin-top:18px;" alt="UF" />
+            <div class="app-phone__card">
+              <div class="l">Клубная карта · Platinum</div>
+              <div class="num">24/7 · ULTRA · FIT</div>
+            </div>
+            <div class="app-phone__stat">
+              <div>
+                <div class="lbl">Дней до окончания</div>
+                <div class="v">312</div>
+              </div>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--brand-bright)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <div class="app-phone__stat">
+              <div>
+                <div class="lbl">Тренировок в мае</div>
+                <div class="v">14</div>
+              </div>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--brand-bright)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="site.js"></script>
+</body>
+</html>

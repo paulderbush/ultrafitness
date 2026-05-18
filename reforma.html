@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>REформа 2026 — Битва за тело — Ultra Fitness</title>
+  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== HERO ===== */
+    .ref-hero {
+      position: relative;
+      min-height: 92vh;
+      padding: 160px var(--pad) 80px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .ref-hero::before {
+      content: '';
+      position: absolute;
+      right: -15%;
+      top: 10%;
+      width: 70vw;
+      max-width: 900px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31,200,81,0.25), transparent 65%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .ref-hero__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .ref-hero__brow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brand-bright);
+      margin-bottom: 28px;
+    }
+    .ref-hero__brow::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--brand-bright);
+      border-radius: 999px;
+      box-shadow: 0 0 14px var(--brand-bright);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .ref-hero h1 {
+      font-size: clamp(56px, 12vw, 224px);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.82;
+    }
+    .ref-hero h1 .re {
+      color: var(--brand-bright);
+      font-style: italic;
+    }
+    .ref-hero h1 .form {
+      -webkit-text-stroke: 2px var(--brand-bright);
+      color: transparent;
+    }
+    .ref-hero__sub {
+      max-width: 60ch;
+      margin-top: 36px;
+      color: var(--text);
+      font-size: clamp(18px, 1.5vw, 22px);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    .ref-hero__sub b { color: var(--brand-bright); font-weight: 700; }
+    .ref-hero__cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== PRIZE BANNER ===== */
+    .prize-banner {
+      padding: 40px var(--pad) 80px;
+    }
+    .prize-banner__panel {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 72px);
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      gap: clamp(28px, 4vw, 64px);
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .prize-banner__panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(50% 60% at 0% 50%, rgba(31, 200, 81, 0.22), transparent 60%),
+        radial-gradient(50% 60% at 100% 50%, rgba(31, 200, 81, 0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .prize-banner__amount {
+      position: relative;
+      font-size: clamp(56px, 8vw, 120px);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      background: linear-gradient(180deg, #fff, var(--brand-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .prize-banner__copy {
+      position: relative;
+      flex: 1 1 320px;
+      min-width: 280px;
+    }
+    .prize-banner__copy .label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+    .prize-banner__copy h3 {
+      font-size: clamp(24px, 2.4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .prize-banner__copy h3 em { color: var(--brand-bright); font-style: normal; }
+    .prize-banner__copy p {
+      margin-top: 12px;
+      color: var(--text-dim);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 50ch;
+    }
+    @media (max-width: 980px) {
+      .prize-banner__panel { text-align: center; justify-content: center; }
+      .prize-banner__copy { flex-basis: 100%; }
+      .prize-banner__copy p { margin-left: auto; margin-right: auto; }
+    }
+
+    /* ===== QUOTE ===== */
+    .ref-quote {
+      padding: 80px var(--pad) 80px;
+      text-align: center;
+    }
+    .ref-quote__inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .ref-quote blockquote {
+      margin: 0;
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+      text-wrap: balance;
+    }
+    .ref-quote blockquote::before { content: '«'; color: var(--brand-bright); margin-right: 4px; }
+    .ref-quote blockquote::after { content: '»'; color: var(--brand-bright); margin-left: 4px; }
+    .ref-quote cite {
+      display: block;
+      margin-top: 28px;
+      font-style: normal;
+      font-size: 14px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--brand-bright);
+      font-weight: 700;
+    }
+    .ref-quote cite::before { content: '— '; }
+
+    /* ===== QUEST ===== */
+    .quest {
+      padding: 60px var(--pad) 80px;
+    }
+    .quest__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .quest__head {
+      max-width: 1320px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 64px;
+      align-items: end;
+    }
+    .quest__head h2 { max-width: 18ch; }
+    .quest__lead { max-width: 38ch; }
+    @media (max-width: 980px) {
+      .quest__head { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .quest h2 {
+      font-size: clamp(36px, 5vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .quest h2 em { color: var(--brand-bright); font-style: normal; }
+    .quest__lead {
+      margin-top: 24px;
+      max-width: 60ch;
+      color: var(--text-dim);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .quest__grid {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .quest-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .quest-card:hover {
+      background: rgba(31,200,81,0.08);
+      border-color: rgba(31,200,81,0.35);
+      transform: translateY(-4px);
+    }
+    .quest-card__num {
+      font-size: 96px;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.85;
+      color: var(--brand-bright);
+      background: linear-gradient(180deg, var(--brand-bright), rgba(31,200,81,0.25));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .quest-card__name {
+      margin-top: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .quest-card__sub {
+      margin-top: 8px;
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    @media (max-width: 880px) {
+      .quest__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===== RULES ===== */
+    .rules {
+      padding: 60px var(--pad) 100px;
+    }
+    .rules__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: clamp(40px, 5vw, 64px);
+      border-radius: var(--radius-xl);
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+    }
+    .rules h2 {
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .rules__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .rules__list li {
+      position: relative;
+      padding: 0 0 0 64px;
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .rules__list li .n {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      background: rgba(31, 200, 81, 0.12);
+      border: 1px solid rgba(31, 200, 81, 0.35);
+      color: var(--brand-bright);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+    .rules__list .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+    }
+    .rules__list .value {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+    .rules__list .value b { color: var(--brand-bright); }
+    @media (max-width: 980px) {
+      .rules__inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ===== FAQ-LIKE who-can ===== */
+    .who-can {
+      padding: 40px var(--pad) 100px;
+    }
+    .who-can__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .who-can h2 {
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .who-can h2 em { color: var(--brand-bright); font-style: normal; }
+    .who-can__free {
+      margin-top: 24px;
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: rgba(31, 200, 81, 0.12);
+      border: 1px solid rgba(31, 200, 81, 0.45);
+      color: var(--brand-bright);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+    }
+    .who-can__free::before {
+      content: '✓';
+      margin-right: 8px;
+      font-weight: 900;
+    }
+    .who-can p { margin-top: 24px; color: var(--text-dim); font-size: 17px; line-height: 1.6; }
+    .who-can p b { color: var(--text); font-weight: 700; }
+    .who-can__photo {
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5), 0 0 60px -10px var(--brand-glow);
+    }
+    .who-can__photo img { width: 100%; height: 100%; object-fit: cover; }
+    .who-can__photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10);
+      border-radius: 28px;
+    }
+    @media (max-width: 980px) {
+      .who-can__inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ===== APPLY ===== */
+    .apply {
+      padding: 60px var(--pad) 120px;
+    }
+    .apply__panel {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 80px);
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .apply__panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 80% at 50% 0%, rgba(31, 200, 81, 0.20), transparent 60%);
+      pointer-events: none;
+    }
+    .apply h2 {
+      position: relative;
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .apply h2 em { color: var(--brand-bright); font-style: normal; }
+    .apply p { position: relative; color: var(--text-dim); font-size: 17px; margin-top: 18px; max-width: 56ch; margin-left: auto; margin-right: auto; line-height: 1.55; }
+    .apply__form {
+      position: relative;
+      max-width: 480px;
+      margin: 36px auto 0;
+      text-align: left;
+    }
+    .apply__note {
+      position: relative;
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 24px;
+      max-width: 50ch;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="ref-hero">
+    <div class="ref-hero__inner">
+      <div class="ref-hero__brow reveal">Битва за тело · 2026</div>
+      <h1 class="reveal" data-delay="1"><span class="re">RE</span><span class="form">форма</span></h1>
+      <p class="ref-hero__sub reveal" data-delay="2">
+        Пришло время меняться — получи тело своей мечты и&nbsp;<b>50 000&nbsp;₽ наличными</b> за&nbsp;максимальный результат. Участие <b>бесплатное</b> для&nbsp;членов клуба.
+      </p>
+      <div class="ref-hero__cta reveal" data-delay="3">
+        <a class="btn btn--primary" href="#apply">
+          Принять участие
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#rules">Условия проекта</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRIZE BANNER ===== -->
+  <section class="prize-banner">
+    <div class="prize-banner__panel glass reveal">
+      <div class="prize-banner__amount">50 000&nbsp;₽ × 2</div>
+      <div class="prize-banner__copy">
+        <div class="label">Призовой фонд</div>
+        <h3>Лучшему среди&nbsp;<em>мужчин</em> и&nbsp;лучшей среди&nbsp;<em>женщин</em></h3>
+        <p>Мы не просто предлагаем похудеть&nbsp;— мы&nbsp;платим за&nbsp;результат. 50&nbsp;000&nbsp;₽ наличными для&nbsp;каждого победителя.</p>
+      </div>
+      <a class="btn btn--primary" href="#apply" style="white-space: nowrap; flex: 0 0 auto;">
+        Участвовать
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="ref-quote">
+    <div class="ref-quote__inner reveal">
+      <blockquote>Ты можешь стать настолько хорош, насколько захочешь. Главное&nbsp;— усердно работать и&nbsp;верить в&nbsp;себя.</blockquote>
+      <cite>Скотт Эдкинс</cite>
+    </div>
+  </section>
+
+  <!-- ===== QUEST ===== -->
+  <section class="quest">
+    <div class="quest__inner">
+      <div class="quest__head">
+        <div>
+          <div class="eyebrow reveal">Фитнес-квест</div>
+          <h2 class="reveal" data-delay="1" style="margin-top:18px;">Что нужно <em>пройти</em><br/>за&nbsp;3&nbsp;месяца</h2>
+        </div>
+        <p class="quest__lead reveal" data-delay="2">Кроме сброса массы тела, участник проходит обязательный квест&nbsp;— с&nbsp;фиксацией на&nbsp;сервис-службе клуба.</p>
+      </div>
+      <div class="quest__grid">
+        <div class="quest-card reveal">
+          <div class="quest-card__num">3</div>
+          <div class="quest-card__name">Персональные тренировки</div>
+          <div class="quest-card__sub">С тренером любого департамента — на&nbsp;выбор</div>
+        </div>
+        <div class="quest-card reveal" data-delay="1">
+          <div class="quest-card__num">3</div>
+          <div class="quest-card__name">Сеанса массажа</div>
+          <div class="quest-card__sub">По&nbsp;60&nbsp;минут каждый&nbsp;— восстановление и&nbsp;тонус</div>
+        </div>
+        <div class="quest-card reveal" data-delay="2">
+          <div class="quest-card__num">2</div>
+          <div class="quest-card__name">Групповые программы</div>
+          <div class="quest-card__sub">Любые на&nbsp;ваш выбор из&nbsp;75 направлений</div>
+        </div>
+        <div class="quest-card reveal" data-delay="3">
+          <div class="quest-card__num">1</div>
+          <div class="quest-card__name">Мастер-класс</div>
+          <div class="quest-card__sub">Согласно календарю мастер-классов клуба</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RULES ===== -->
+  <section class="rules" id="rules">
+    <div class="rules__inner glass reveal">
+      <div>
+        <div class="eyebrow">Правила проекта</div>
+        <h2 style="margin-top:18px;">«Битва<br/>за&nbsp;тело: <em style="color:var(--brand-bright);font-style:italic;">РЕФОРМА</em>»</h2>
+      </div>
+      <ul class="rules__list">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <div class="label">Сроки</div>
+            <div class="value">Проект проводится <b>с&nbsp;15 февраля по&nbsp;15 мая</b></div>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <div class="label">Стоимость</div>
+            <div class="value">Участие <b>бесплатное</b> — нужно только активное членство клуба</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <div class="label">Замеры</div>
+            <div class="value">Перед стартом и&nbsp;в&nbsp;конце проекта делаются фото и&nbsp;замеры участников</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <div class="label">Условие победы</div>
+            <div class="value">Максимальный сброс общего веса тела в&nbsp;кг&nbsp;— от&nbsp;изначального к&nbsp;итоговому</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">05</span>
+          <div>
+            <div class="label">Призовой фонд</div>
+            <div class="value"><b>50 000&nbsp;₽</b> — 1-е место мужчины · <b>50 000&nbsp;₽</b> — 1-е место женщины. Наличными.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== WHO CAN ===== -->
+  <section class="who-can">
+    <div class="who-can__inner">
+      <div class="reveal">
+        <div class="eyebrow">Кто и как</div>
+        <h2 style="margin-top:18px;">Может&nbsp;<em>принять<br/>участие</em></h2>
+        <div class="who-can__free">Участие бесплатное</div>
+        <p>
+          <b>Всё, что от&nbsp;тебя нужно</b> — быть членом клуба <b>18+</b> и&nbsp;показать максимальный результат по&nbsp;сбросу веса. Победителя определяет сочетание двух критериев&nbsp;— потеря массы тела в&nbsp;килограммах и&nbsp;выполнение фитнес-квеста.
+        </p>
+      </div>
+      <div class="who-can__photo reveal" data-delay="1">
+        <img src="assets/club-2.jpeg" alt="Бойцовский зал Ultra Fitness" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPLY ===== -->
+  <section class="apply" id="apply">
+    <div class="apply__panel glass reveal">
+      <div class="eyebrow" style="position:relative;">Старт 15 февраля</div>
+      <h2 style="margin-top:18px;">Хочешь идеальное тело<br/>и&nbsp;<em>50&nbsp;000&nbsp;₽</em>?</h2>
+      <p>Заполни заявку на&nbsp;участие. Менеджер свяжется с&nbsp;тобой и&nbsp;объяснит следующие шаги — стартовые замеры, фото, расписание тренировок.</p>
+
+      <form class="uf-form apply__form" id="applyForm" novalidate>
+        <div class="uf-field">
+          <input type="text" name="name" placeholder="Ваше имя" required autocomplete="name" />
+        </div>
+        <div class="uf-field">
+          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required autocomplete="tel" data-phone-mask />
+        </div>
+        <label class="uf-consent">
+          <input type="checkbox" name="consent" checked required />
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span>Я даю согласие на обработку моих персональных данных в соответствии с <a href="#">Политикой</a></span>
+        </label>
+        <button type="submit" class="btn btn--primary">
+          Принять участие
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <p class="apply__note">Правила и сроки проведения проекта могут изменяться. Об изменениях мы сообщим в&nbsp;чате проекта и&nbsp;по&nbsp;телефону.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="site.js"></script>
+<script>
+  document.getElementById('applyForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const f = e.target;
+    if (!f.name.value.trim() || f.phone.value.replace(/\D/g, '').length < 11 || !f.consent.checked) return;
+    f.innerHTML = `
+      <div class="uf-thanks" style="display:block; padding: 6px 0;">
+        <div class="uf-thanks__icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3 class="uf-modal__title" style="font-size:22px;">Заявка принята</h3>
+        <p class="uf-modal__sub" style="margin: 8px 0 0;">Менеджер свяжется в ближайшее время</p>
+      </div>`;
+  });
+</script>
+</body>
+</html>
