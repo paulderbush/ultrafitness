@@ -1054,6 +1054,23 @@
 
 </main>
 
+<!-- LIGHTBOX — must be before scripts so getElementById('lightbox') works -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__btn" id="lbClose" aria-label="Закрыть">
+    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Предыдущее">
+    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Следующее">
+    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="lightbox__stage">
+    <img class="lightbox__img" id="lbImg" alt="" />
+  </div>
+  <div class="lightbox__counter"><b id="lbCur">1</b> / <span id="lbTotal">8</span></div>
+</div>
+
 <script src="site.js"></script>
 <script src="fly-card.js"></script>
 <script>
@@ -1212,21 +1229,5 @@
   });
 </script>
 
-<!-- LIGHTBOX — at body level so z-index:400 is in root stacking context -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <button class="lightbox__btn" id="lbClose" aria-label="Закрыть">
-    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </button>
-  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Предыдущее">
-    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Следующее">
-    <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-  <div class="lightbox__stage">
-    <img class="lightbox__img" id="lbImg" alt="" />
-  </div>
-  <div class="lightbox__counter"><b id="lbCur">1</b> / <span id="lbTotal">8</span></div>
-</div>
 </body>
 </html>
