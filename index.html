@@ -670,6 +670,7 @@
     }
     .news__carousel {
       overflow: hidden;
+      container-type: inline-size;
     }
     .news__track {
       display: flex;
@@ -678,12 +679,16 @@
     }
     .news-card {
       position: relative;
+      width: calc((100cqi - 3 * 18px) / 4);
       aspect-ratio: 700 / 1010;
       border-radius: 22px;
       overflow: hidden;
       cursor: pointer;
       flex-shrink: 0;
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @container (max-width: 640px) {
+      .news-card { width: 100cqi; }
     }
     .news-card img {
       width: 100%;
@@ -1152,15 +1157,8 @@
     var busy = false;
     var currentStep = 0;
 
-    function visibleCount() {
-      return window.innerWidth <= 640 ? 1 : 4;
-    }
-
     function recalc() {
-      var vis = visibleCount();
-      var W = viewport.offsetWidth;
-      var cw = (W - (vis - 1) * GAP) / vis;
-      allCards.forEach(function(card) { card.style.width = cw + 'px'; });
+      var cw = allCards[CLONES].offsetWidth; // read from CSS (container query sets widths)
       currentStep = cw + GAP;
     }
 
@@ -1206,8 +1204,11 @@
 
     window.addEventListener('resize', function() { recalc(); moveTo(idx, false); });
 
-    recalc();
-    moveTo(idx, false);
+    // Defer until browser has completed layout so offsetWidth is accurate
+    requestAnimationFrame(function() {
+      recalc();
+      moveTo(idx, false);
+    });
   })();
 
   // Handle in-line offer form (re-use modal thanks flow)
