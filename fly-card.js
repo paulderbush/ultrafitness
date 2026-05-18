@@ -59,6 +59,7 @@
     const tops = getSectionTops();
     const vh = window.innerHeight;
     const trigger = window.scrollY + vh * 0.45; // anchor point in viewport
+    const isMobile = window.innerWidth < 640;
 
     // find segment
     let i = 0;
@@ -84,8 +85,12 @@
     const cw = cardW();
     const ch = cardH();
     // position uses center reference; convert vw/vh to px
-    const px = (xv / 100) * vw - cw / 2;
-    const py = (yv / 100) * window.innerHeight - ch / 2;
+    let px = (xv / 100) * vw - cw / 2;
+    let py = (yv / 100) * window.innerHeight - ch / 2;
+    // keep within viewport with a margin
+    const m = 8;
+    px = Math.max(m, Math.min(vw - cw - m, px));
+    py = Math.max(m, Math.min(window.innerHeight - ch - m, py));
 
     // gentle float layered on top of the position (sin of scrollY)
     const floatY = Math.sin(window.scrollY * 0.004) * 8;

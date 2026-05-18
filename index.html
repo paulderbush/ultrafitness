@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ultra Fitness — фитнес-клуб премиум-класса в Люберцах</title>
-  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -255,18 +256,23 @@
       .fly-card__num { font-size: 15px; }
     }
     @media (max-width: 640px) {
-      .fly-card { width: 220px; height: 138px; }
-      .fly-card__inner { padding: 14px 16px; border-radius: 18px; }
-      .fly-card__logo { height: 18px; }
-      .fly-card__num { font-size: 12px; }
-      .fly-card__chip { width: 30px; height: 24px; }
+      .fly-card { width: 180px; height: 112px; }
+      .fly-card__inner { padding: 12px 14px; border-radius: 16px; }
+      .fly-card__logo { height: 15px; }
+      .fly-card__num { font-size: 10px; letter-spacing: 0.10em; }
       .fly-card__bottom .label { font-size: 7px; }
-      .fly-card__bottom .value { font-size: 11px; }
+      .fly-card__bottom .value { font-size: 10px; }
+      .fly-card__type { font-size: 8px; padding: 3px 7px; }
+    }
+    @media (max-width: 380px) {
+      .fly-card { width: 150px; height: 92px; }
+      .fly-card__logo { height: 13px; }
+      .fly-card__num { font-size: 9px; }
     }
 
     /* ===== STATS ===== */
     .stats {
-      padding: clamp(80px, 14vh, 160px) var(--pad);
+      padding: clamp(40px, 7vh, 80px) var(--pad);
       position: relative;
       z-index: 2;
     }
@@ -317,7 +323,7 @@
 
     .cta-block {
       max-width: 1320px;
-      margin: 60px auto 0;
+      margin: 32px auto 0;
       padding: 0 0;
       display: flex;
       justify-content: center;
@@ -325,7 +331,7 @@
 
     /* ===== ABOUT ===== */
     .about {
-      padding: clamp(80px, 14vh, 160px) var(--pad);
+      padding: clamp(40px, 7vh, 80px) var(--pad);
       position: relative;
       z-index: 2;
     }
@@ -365,7 +371,7 @@
 
     /* ===== 999 BLOCK ===== */
     .offer-999 {
-      padding: clamp(60px, 10vh, 120px) var(--pad);
+      padding: clamp(30px, 5vh, 60px) var(--pad);
       position: relative;
       z-index: 2;
     }
@@ -424,13 +430,13 @@
 
     /* ===== SALES (3 cards) ===== */
     .sales {
-      padding: clamp(80px, 14vh, 160px) var(--pad);
+      padding: clamp(40px, 7vh, 80px) var(--pad);
       position: relative;
       z-index: 2;
     }
     .sales__head {
       max-width: 1320px;
-      margin: 0 auto 56px;
+      margin: 0 auto 32px;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -474,13 +480,13 @@
 
     /* ===== GALLERY ===== */
     .gallery {
-      padding: clamp(80px, 14vh, 160px) var(--pad);
+      padding: clamp(40px, 7vh, 80px) var(--pad);
       position: relative;
       z-index: 2;
     }
     .gallery__head {
       max-width: 1320px;
-      margin: 0 auto 56px;
+      margin: 0 auto 32px;
     }
     .gallery__grid {
       max-width: 1320px;
@@ -648,13 +654,13 @@
 
     /* ===== NEWS ===== */
     .news {
-      padding: clamp(80px, 14vh, 160px) var(--pad);
+      padding: clamp(40px, 7vh, 80px) var(--pad);
       position: relative;
       z-index: 2;
     }
     .news__head {
       max-width: 1320px;
-      margin: 0 auto 56px;
+      margin: 0 auto 32px;
     }
     .news__rail {
       max-width: 1320px;
@@ -688,7 +694,7 @@
 
     /* ===== MAP ===== */
     .map-block {
-      padding: clamp(60px, 10vh, 120px) var(--pad);
+      padding: clamp(30px, 5vh, 60px) var(--pad);
       position: relative;
       z-index: 2;
     }
@@ -743,10 +749,7 @@
       .map-block__iframe { min-height: 320px; }
     }
 
-    /* hide flying card on smallest screens to keep things tidy */
-    @media (max-width: 480px) {
-      .fly-card { display: none; }
-    }
+    /* keep card visible on mobile but scaled down via media queries above */
   </style>
 </head>
 <body>
